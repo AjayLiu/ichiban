@@ -5,7 +5,7 @@ export default function Footer() {
     <>
       <footer className={styles.footer}>
         <p>
-          © 2020 Ajay Liu. All Rights Reserved •
+          © 2020 <a href="https://ajayliu.com">Ajay Liu</a>. All Rights Reserved •
           <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@ajayliu.com"
             > contact@ajayliu.com
           </a>
