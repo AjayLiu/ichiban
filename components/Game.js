@@ -3,6 +3,7 @@ import axios from 'axios'
 import React, {useState, useEffect} from 'react'
 
 import AnimeDiv from '@components/AnimeDiv'
+import shuffle from 'shuffle-array';
 
 export default function Game() {
   
@@ -13,14 +14,35 @@ export default function Game() {
     const [randList, setRandList] = useState(()=>{return []});
     const [score, setScore] = useState(()=>{return 0});
     const [champIndex, setChampIndex] = useState(()=>{return 0});
-    const [champ, setChamp] = useState({title: 'test'});
-    const [challenger, setChallenger] = useState({title: 'test2'});
-    const [revealNumbers, setRevealNumbers] = useState({});
+    const [champ, setChamp] = useState({reveal: false});
+    const [challenger, setChallenger] = useState({reveal: false});
     const [gameover, setGameover] = useState(()=>{return false});
-  
+    const [resetGame, setResetGame] = useState(()=>{return false});
+
     var url = `https://api.jikan.moe/v3/top/anime/${page}/bypopularity`;
     
   
+    useEffect(()=>{
+      //reset game
+      if(resetGame){
+        shuffleRandList();
+        setScore(0);
+        setChampIndex(0);
+        setGameover(false);
+        setResetGame(false);
+      }
+    },[resetGame])
+
+    function shuffleRandList() {
+      var shuffle = require('shuffle-array');
+      //make an array filled from 0 to pool.length
+      var tempArr = Array.from(Array(pool.length).keys());
+      shuffle(tempArr);      
+      setRandList(tempArr);
+      setLoading(false);
+      console.log(pool);
+    }
+
     //fill up pool with anime
     useEffect(()=>{
       async function fetchData(){
@@ -30,12 +52,7 @@ export default function Game() {
         if(page < pagesToGet)
           setPage(prevPage => prevPage+1);
         else {
-          var shuffle = require('shuffle-array');
-          //make an array filled from 0 to pool.length
-          var tempArr = Array.from(Array(pool.length).keys());
-          shuffle(tempArr);      
-          setRandList(tempArr);
-          setLoading(false);
+          shuffleRandList();
         }
         return request;
       }
@@ -53,26 +70,46 @@ export default function Game() {
   
     useEffect(()=>{
       if(!loading){
-        setChamp(pool[randList[champIndex]]);
+        setChamp(prevChamp => {
+          return {
+            ...pool[randList[champIndex]],
+            reveal:true,
+            higher: prevChamp.higher
+          }
+        });
         setChallenger(pool[randList[score+1]]);
       }
     }, [champIndex, score, loading])
   
     function onAnimeClick(isChamp){
+      
       var champHigher = champ.members > challenger.members;
+      setChamp(prevChamp=>{        
+        return {
+          ...prevChamp,
+          reveal: true, 
+          higher: champHigher
+        }
+      });
+      setChallenger(prevChallenger=>{        
+        return {
+          ...prevChallenger,
+          reveal: true,
+          higher: !champHigher
+        }
+      });
       //guessed correctly
       if(isChamp == champHigher){
+
+
+
         setChampIndex(prevChamp => prevChamp+1);      
         setScore(prevScore=>prevScore+1);
-        setRevealNumbers(true);
       } else {
         setGameover(true);
       }
     }
 
-    useEffect(()=>{
-
-    }, [revealNumbers]);
 
     return (
         <main>
@@ -85,17 +122,26 @@ export default function Game() {
             <>
             <h1>Which Anime Has More Fans (according to MyAnimeList.net)?</h1>
             <h2 className={styles.score}>
-                {gameover ? <div>GAME OVER</div> : <div>Score: {score}</div>}
+              Score: {score}
             </h2>
             <div className = {styles.battlefield}>
                 {
                 <>            
-                <AnimeDiv clickCallback={()=>onAnimeClick(true)} obj = {champ}/>
-                <AnimeDiv clickCallback={()=>onAnimeClick(false)} obj = {challenger}/>                        
+                <AnimeDiv clickCallback={()=>onAnimeClick(true)} obj = {champ} gameover={gameover}/>
+                <div id={styles.orLabel}>
+                  {
+                    gameover ? 
+                    <div>
+                      Game Over
+                      <button onClick={()=>{setResetGame(true)}}>Press to play again</button>
+                    </div>
+                    :
+                    <div>OR</div>
+                  }
+                </div>
+                <AnimeDiv clickCallback={()=>onAnimeClick(false)} obj = {challenger} gameover={gameover}/>                        
                 </>
-                }
-                        
-
+                }              
             </div> 
             </>
             }

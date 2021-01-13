@@ -1,6 +1,12 @@
+#orLabel {
+  font-size: 200%;
+  margin-top: 150px;
+}
+
 .battlefield {
-  min-height: 100vh;
+  min-height: 65vh;
   width: 100%;
   display: flex;
+  align-items: stretch;
   justify-content: space-evenly;
 }
