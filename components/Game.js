@@ -5,6 +5,10 @@ import React, {useState, useEffect} from 'react'
 import AnimeDiv from '@components/AnimeDiv'
 import shuffle from 'shuffle-array';
 
+import useWindowDimensions from '@components/windowDimensions'
+
+
+
 export default function Game() {
   
     const pagesToGet = 4;
@@ -19,6 +23,8 @@ export default function Game() {
     const [gameover, setGameover] = useState(()=>{return false});
     const [resetGame, setResetGame] = useState(()=>{return false});
 
+    const { height, width } = useWindowDimensions()
+
     var url = `https://api.jikan.moe/v3/top/anime/${page}/bypopularity`;
     
   
@@ -26,21 +32,18 @@ export default function Game() {
       //reset game
       if(resetGame){
         shuffleRandList();
-        setScore(0);
+        setScore(0);        
         setChampIndex(0);
         setGameover(false);
         setResetGame(false);
       }
     },[resetGame])
-
+    
     function shuffleRandList() {
-      var shuffle = require('shuffle-array');
-      //make an array filled from 0 to pool.length
-      var tempArr = Array.from(Array(pool.length).keys());
-      shuffle(tempArr);      
-      setRandList(tempArr);
+      //make an array filled from 0 to pagesToGet * 50
+      var tempArr = Array.from(Array(pagesToGet*50).keys());           
+      setRandList(shuffle(tempArr));
       setLoading(false);
-      console.log(pool);
     }
 
     //fill up pool with anime
@@ -57,6 +60,7 @@ export default function Game() {
         return request;
       }
       fetchData();
+
     }, [page]);
     
   
@@ -66,8 +70,9 @@ export default function Game() {
       
     }, [score, loading]);
     
-  
-  
+    
+
+    
     useEffect(()=>{
       if(!loading){
         setChamp(prevChamp => {
@@ -79,37 +84,50 @@ export default function Game() {
         });
         setChallenger(pool[randList[score+1]]);
       }
-    }, [champIndex, score, loading])
+    }, [champIndex, score, loading, randList])
   
     function onAnimeClick(isChamp){
-      
-      var champHigher = champ.members > challenger.members;
-      setChamp(prevChamp=>{        
-        return {
-          ...prevChamp,
-          reveal: true, 
-          higher: champHigher
+      if(!gameover){
+        var champHigher = champ.members > challenger.members;
+        setChamp(prevChamp=>{        
+          return {
+            ...prevChamp,
+            reveal: true, 
+            higher: champHigher
+          }
+        });
+        setChallenger(prevChallenger=>{        
+          return {
+            ...prevChallenger,
+            higher: !champHigher
+          }
+        });
+        //guessed correctly
+        if(isChamp == champHigher){
+          setChampIndex(prevChamp => prevChamp+1);      
+          setScore(prevScore=>prevScore+1);
+        } else {
+          setChallenger(prevChallenger=>{
+            return {
+              ...prevChallenger,
+              reveal: true
+            }
+          });
+          setGameover(true);
         }
-      });
-      setChallenger(prevChallenger=>{        
-        return {
-          ...prevChallenger,
-          reveal: true,
-          higher: !champHigher
-        }
-      });
-      //guessed correctly
-      if(isChamp == champHigher){
-
-
-
-        setChampIndex(prevChamp => prevChamp+1);      
-        setScore(prevScore=>prevScore+1);
-      } else {
-        setGameover(true);
       }
     }
 
+    var mobileThreshold = 800;
+
+    const gameoverElem = (
+      <div className={styles.gameoverElem} onClick={()=>{setResetGame(true)}}>
+        <div className={styles.gameoverLabel}>
+          Game Over
+        </div>
+        <div className={styles.gameoverBtn}>Press to play again</div>
+      </div>
+    )
 
     return (
         <main>
@@ -120,24 +138,29 @@ export default function Game() {
             </div>
             :
             <>
-            <h1>Which Anime Has More Fans (according to MyAnimeList.net)?</h1>
+            <h1 className={styles.prompt}>Which Anime Has More Fans (according to MyAnimeList.net)?</h1>
             <h2 className={styles.score}>
-              Score: {score}
+              Score: {score}              
             </h2>
+
+            <div>
+              {
+                width <= mobileThreshold && gameover && gameoverElem            
+              }
+            </div>
+
             <div className = {styles.battlefield}>
                 {
                 <>            
                 <AnimeDiv clickCallback={()=>onAnimeClick(true)} obj = {champ} gameover={gameover}/>
-                <div id={styles.orLabel}>
+                <div style={{  marginTop: "75px"}}>
                   {
-                    gameover ? 
-                    <div>
-                      Game Over
-                      <button onClick={()=>{setResetGame(true)}}>Press to play again</button>
-                    </div>
+                    //Desktop gameover button
+                    width <= mobileThreshold || (gameover ? 
+                    gameoverElem
                     :
-                    <div>OR</div>
-                  }
+                    <div id={styles.orLabel}>{"OR"}</div>
+                  )}
                 </div>
                 <AnimeDiv clickCallback={()=>onAnimeClick(false)} obj = {challenger} gameover={gameover}/>                        
                 </>

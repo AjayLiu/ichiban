@@ -1,5 +1,5 @@
 .animeContainer {
-  width: 50%;
+  width: 45%;
   height: 50vh;
 }
 
@@ -13,7 +13,8 @@
 }
 
 .animeImg {
-  height: 50%;
+  max-width: 100%;
+  max-height: 70%;
 }
 
 .fanCount {
@@ -24,7 +25,7 @@
   color: white;
 }
 .higher {
-  color: green;
+  color: greenyellow;
 }
 
 .lower {

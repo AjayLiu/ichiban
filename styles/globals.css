@@ -32,28 +32,9 @@ body {
   margin: 0;
   height: 100%;
   width: 100%;
-  flex-direction: column;
   text-align: center;
   /* overflow-x: hidden; */
 }
-
-section {
-  width: 100%;
-  margin: 20px auto;
-}
-
-.sectionTitle {
-  width: max-content;
-  height: 70px;
-  margin: 40px auto 40px auto;
-  font-size: xx-large;
-  border-bottom: 1px solid white;
-}
-
-/* #clickToTry {
-  margin: 30px;
-  font-size: large;
-} */
 
 a {
   color: white;
@@ -64,10 +45,6 @@ a:hover {
   text-decoration: underline;
 }
 
-/* TABLET */
-@media screen and (max-width: 1200px) {
-  section {
-    width: 90%;
-    margin: auto;
-  }
+h1 {
+  margin: auto 20px;
 }

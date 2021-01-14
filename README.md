@@ -1,9 +1,9 @@
 ### About
 
-This is my website to showcase my projects
+Data fetched from Jikan API
 
 Built using React and Next.js, hosted via Netlify
 
 ### Website
 
-[Visit Now!](https://ajayliu.com/)
+[Visit Now!](https://ichiban.netlify.app/)

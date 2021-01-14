@@ -1,12 +1,53 @@
-#orLabel {
+.prompt {
   font-size: 200%;
-  margin-top: 150px;
+}
+
+#orLabel {
+  margin: 30px;
+  font-size: 200%;
+}
+
+.score {
+  margin: 100px auto 50px;
 }
 
 .battlefield {
   min-height: 65vh;
-  width: 100%;
+  margin: 0 auto 100px;
+  width: 50%;
   display: flex;
   align-items: stretch;
   justify-content: space-evenly;
+}
+
+.gameoverElem {
+  border: 1px solid white;
+  width: fit-content;
+  padding: 10px 50px;
+  border-radius: 25px;
+  margin: 50px auto;
+}
+.gameoverElem:hover {
+  cursor: pointer;
+}
+.gameoverLabel {
+  margin: auto;
+
+  width: 200px;
+  font-size: 200%;
+}
+.gameoverBtn {
+  width: 200px;
+  margin: 20px auto;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid white;
+  background-color: #23262f;
+  font-size: 100%;
+}
+
+@media only screen and (max-width: 800px) {
+  .battlefield {
+    width: 100%;
+  }
 }
