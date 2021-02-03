@@ -50,6 +50,7 @@ export default function Game() {
     useEffect(()=>{
       async function fetchData(){
         const request = await axios.get(url);
+        console.log(request)
         setPool(prevPool=>prevPool.concat(request.data.top));
         //recursively call again to get more pages
         if(page < pagesToGet)
