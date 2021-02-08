@@ -16,7 +16,7 @@ async function setData(newScore) {
     await client.db('ichiban').collection('highscore').insertOne(
         { 
             "score" : newScore,
-            "time": Date()
+            "time": new Date().toISOString()
         }
     )
   } catch (err) {

@@ -164,7 +164,7 @@ export default function Game() {
           <>
           <h1 className={styles.prompt}>Which Anime Has More Fans (according to MyAnimeList.net)?</h1>
           <h2 className={styles.score}>
-            <p>Global High Score: {highscore}</p>            
+            <p>Global High Score (past 30 days): {highscore}</p>            
             <p>Score: {score} </p> 
           </h2>
 

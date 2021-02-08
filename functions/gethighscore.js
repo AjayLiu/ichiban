@@ -14,10 +14,15 @@ async function getData() {
 
   try {
     await client.connect();
+    let date = new Date();
+    date.setDate(date.getDate() - 30);
+    date = date.toISOString();
+    // console.log(date);
     const test = await client
       .db('ichiban')
       .collection('highscore')
-      .find().sort({"score":-1}).limit(1).toArray()
+      .find({"time": { $gte : date}}).sort({"score":-1}).limit(1).toArray()
+      // .find().sort({"score":-1}).limit(1).toArray()
     return test;
   } catch (err) {
     console.log(err); // output to netlify function log
@@ -29,6 +34,7 @@ async function getData() {
 exports.handler = async function(event, context) {
   try {
     const data = await getData();
+    // console.log(data[0].time)
     // console.log(data);
     return {
       statusCode: 200,
