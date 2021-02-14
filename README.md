@@ -1,9 +1,11 @@
-### About
+# Ichiban
+
+## About
 
 Data fetched from Jikan API
 
 Built using React and Next.js, hosted via Netlify
 
-### Website
+## Website
 
 [Visit Now!](https://ichiban.netlify.app/)
