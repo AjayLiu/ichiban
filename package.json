@@ -1,23 +1,21 @@
 {
-  "name": "anime-game",
+  "name": "ichiban",
   "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "next export"
+    "export": "yarn build && next export"
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "jikan-node": "^1.2.1",
     "mongodb": "^3.6.4",
     "next": "10.0.4",
     "numeral": "^2.0.6",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-ga": "^3.3.0",
-    "react-router-dom": "^5.2.0",
     "shuffle-array": "^1.0.1"
   }
 }

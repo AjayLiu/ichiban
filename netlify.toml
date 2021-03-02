@@ -7,3 +7,16 @@
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
+
+[[plugins]]
+  package = "netlify-plugin-image-optim"
+[[plugins]]
+  package = "netlify-plugin-inline-source"
+[[plugins]]
+  package = "netlify-plugin-minify-html"
+[[plugins]]
+  package = "netlify-plugin-cache-nextjs"
+[[plugins]]
+  package = "@netlify/plugin-sitemap"
+[[plugins]]
+  package = "netlify-plugin-submit-sitemap"
