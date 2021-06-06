@@ -1,4 +1,5 @@
 # Ichiban
+![screenshot](preview.png)
 
 ## About
 
