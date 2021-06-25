@@ -13,7 +13,6 @@
 </p>
 
 
-
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary>Table of Contents</summary>
@@ -29,6 +28,8 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#development">Development</a></li>
+        <li><a href="#deployment">Deployment</a></li>
       </ul>
     </li>
     <li><a href="#license">License</a></li>
@@ -79,8 +80,7 @@ Here is a guide if you want to clone my website and modify it for yourself, all 
    USER=
    PASSWORD=
    ```
-4. Make sure to enter the same environment variables to Netlify.
-5. Publish the site on Netlify using continuous git integration. :tada:
+
 
 ### Development
 
@@ -94,6 +94,11 @@ To test out the high score functionality, run this instead (install Netlify CLI 
    ```sh
    netlify dev
    ```
+
+### Deployment
+1. Publish the site on Netlify using continuous git integration.
+2. Make sure to enter the same environment variables to Netlify.
+
 <!-- LICENSE -->
 ## License
 
