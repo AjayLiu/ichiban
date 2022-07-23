@@ -58,18 +58,11 @@ export default function Game() {
     }
   }, [resetGame]);
 
-  const url = "https://api.jikan.moe/v4/top/anime";
-
+  const url = `https://api.jikan.moe/v4/top/anime?type=tv&filter=bypopularity&page=${page}`;
   //fill up pool with anime
   useEffect(() => {
     const fetchData = async () => {
-      const queryParams = new URLSearchParams([
-        ["type", "tv"],
-        ["filter", "bypopularity"],
-        ["page", page],
-      ]);
-      const request = await axios.get(url, { queryParams });
-      // console.log(request.data.data);
+      const request = await axios.get(url);
       setPool((prevPool) => prevPool.concat(request.data.data));
       //recursively call again to get more pages
       if (page < pagesToGet) setPage((prevPage) => prevPage + 1);
@@ -93,7 +86,9 @@ export default function Game() {
   }, []);
 
   // every time the player advances or loses, run this
-  useEffect(() => {}, [score, loading]);
+  useEffect(() => {
+    console.log(pool);
+  }, [score, loading]);
 
   useEffect(() => {
     if (!loading) {
@@ -105,6 +100,7 @@ export default function Game() {
         };
       });
       setChallenger(pool[randList[score + 1]]);
+      console.log(champIndex);
     }
   }, [champIndex, score, loading, randList]);
 
