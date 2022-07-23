@@ -41,8 +41,6 @@ export default function Game() {
 
   const { height, width } = useWindowDimensions();
 
-  const url = `https://api.jikan.moe/v3/top/anime/${page}/bypopularity`;
-
   const shuffleRandList = () => {
     //make an array filled from 0 to pagesToGet * 50
     let tempArr = Array.from(Array(pagesToGet * 50).keys());
@@ -60,12 +58,19 @@ export default function Game() {
     }
   }, [resetGame]);
 
+  const url = "https://api.jikan.moe/v4/top/anime";
+
   //fill up pool with anime
   useEffect(() => {
     const fetchData = async () => {
-      const request = await axios.get(url);
-      // console.log(request)
-      setPool((prevPool) => prevPool.concat(request.data.top));
+      const queryParams = new URLSearchParams([
+        ["type", "tv"],
+        ["filter", "bypopularity"],
+        ["page", page],
+      ]);
+      const request = await axios.get(url, { queryParams });
+      // console.log(request.data.data);
+      setPool((prevPool) => prevPool.concat(request.data.data));
       //recursively call again to get more pages
       if (page < pagesToGet) setPage((prevPage) => prevPage + 1);
       else {

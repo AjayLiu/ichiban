@@ -18,5 +18,8 @@
     "react-ga": "^3.3.0",
     "sass": "^1.32.8",
     "shuffle-array": "^1.0.1"
+  },
+  "devDependencies": {
+    "netlify-cli": "^10.11.1"
   }
 }
