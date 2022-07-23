@@ -87,7 +87,7 @@ export default function Game() {
 
   // every time the player advances or loses, run this
   useEffect(() => {
-    console.log(pool);
+    // console.log(pool);
   }, [score, loading]);
 
   useEffect(() => {
