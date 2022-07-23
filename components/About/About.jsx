@@ -17,7 +17,7 @@ export default function About() {
           The top 200 animes sorted by popularity are fetched from the API and
           randomly picked in the matchups.
         </p>
-        <p>The game will break if you reach a score of 200 ;)</p>
+        <p>The game will break if you reach a score of 75 ;)</p>
       </div>
     </>
   );
