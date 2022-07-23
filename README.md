@@ -1,4 +1,5 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a13f5084-4255-444d-b839-8afa2aa83f60/deploy-status)](https://app.netlify.com/sites/ichiban/deploys)
+
 <p align="center">
   <a href="https://github.com/AjayLiu/ichiban">
     <img src="public/imgs/logo.png" alt="Logo" width="80" height="80">
@@ -11,7 +12,6 @@
     <br />
     <a href="https://ichiban.ajayliu.com"><strong>Play now »</strong></a>
 </p>
-
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
@@ -38,32 +38,32 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 <img src="preview.png"></img>
 
-The top 150 most popular animes are fetched from [Jikan API](https://jikan.moe). They are randomized and matched up with each other. High scores are stored in a MongoDB database. 
+The top 75 most popular animes are fetched from [Jikan API](https://jikan.moe). They are randomized and matched up with each other. High scores are stored in a MongoDB database.
 
 ### Built With
-* [Next.js](https://nextjs.org/)
-* [React](https://reactjs.org/)
-* [SCSS](https://sass-lang.com/)
-* [Netlify](https://www.netlify.com/)
-* [MongoDB](https://www.mongodb.com)
 
+- [Next.js](https://nextjs.org/)
+- [React](https://reactjs.org/)
+- [SCSS](https://sass-lang.com/)
+- [Netlify](https://www.netlify.com/)
+- [MongoDB](https://www.mongodb.com)
 
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 Here is a guide if you want to clone my website and modify it for yourself, all the way to deployment.
 
 ### Prerequisites
 
-* [yarn](https://yarnpkg.com/)
-* [git](https://git-scm.com/)
+- [yarn](https://yarnpkg.com/)
+- [git](https://git-scm.com/)
 
 ### Installation
 
@@ -81,42 +81,45 @@ Here is a guide if you want to clone my website and modify it for yourself, all 
    PASSWORD=
    ```
 
-
 ### Development
 
 To run the development server
-   ```sh
-   yarn dev
-   ```
+
+```sh
+yarn dev
+```
+
 Then head over to localhost:3000
 
 To test out the high score functionality, run this instead (install Netlify CLI first):
-   ```sh
-   netlify dev
-   ```
+
+```sh
+netlify dev
+```
 
 ### Deployment
+
 1. Publish the site on Netlify using continuous git integration.
 2. Make sure to enter the same environment variables to Netlify.
 
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-
-
 <!-- CONTACT -->
+
 ## Contact
 
 Ajay Liu - contact@ajayliu.com
 
 Project Link: [https://github.com/AjayLiu/ichiban](https://github.com/AjayLiu/ichiban)
 
-
-
 <!-- ACKNOWLEDGEMENTS -->
+
 ## Acknowledgements
-* [Jikan API](https://jikan.moe)
-* [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-* [Netlify](https://www.netlify.com/)
+
+- [Jikan API](https://jikan.moe)
+- [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+- [Netlify](https://www.netlify.com/)

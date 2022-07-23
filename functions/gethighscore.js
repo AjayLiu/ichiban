@@ -27,6 +27,8 @@ async function getData() {
     // .find().sort({"score":-1}).limit(1).toArray()
     return test;
   } catch (err) {
+    // reached here probably because no high score was logged in past 30 days
+    return [{ score: 0 }];
     console.log(err); // output to netlify function log
   } finally {
     await client.close();
@@ -37,7 +39,7 @@ exports.handler = async function (event, context) {
   try {
     const data = await getData();
     // console.log(data[0].time)
-    // console.log(data);
+    // console.log(data[0].score);
     return {
       statusCode: 200,
       body: JSON.stringify({ score: data[0].score }),

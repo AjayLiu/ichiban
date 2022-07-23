@@ -8,7 +8,7 @@ import shuffle from "shuffle-array";
 import useWindowDimensions from "@components/windowDimensions";
 
 export default function Game() {
-  const pagesToGet = 4;
+  const pagesToGet = 3;
   const [page, setPage] = useState(() => {
     return 1;
   });
@@ -42,8 +42,8 @@ export default function Game() {
   const { height, width } = useWindowDimensions();
 
   const shuffleRandList = () => {
-    //make an array filled from 0 to pagesToGet * 50
-    let tempArr = Array.from(Array(pagesToGet * 50).keys());
+    //make an array filled from 0 to pagesToGet * 25
+    let tempArr = Array.from(Array(pagesToGet * 25).keys());
     setRandList(shuffle(tempArr));
     setLoading(false);
   };
